@@ -14,34 +14,10 @@ set cpo&vim
 
 command! NoSwapfile :call s:noswap()
 command! FindSwp :call s:FindSwp()
+command! FindSwo :call s:FindSwo()
+command! FindSwn :call s:FindSwn()
+command! FindAllSwap :call s:FindAllSwap()
 
-function! s:noswap()
-        set noswapfile
-endfunction
-
-function! s:ChangeSwapDirectory(dir)
-        set directory=(dir)
-endfunction
-
-function! s:FindSwp()
-        call system("find . -name '.*.swp'")
-        call system("find . -name '.swp'")
-endfunction
-
-function! s:FindSwo()
-        call system("find . -name '.*.swo'")
-        call system("find . -name '.swo'")
-endfunction
-
-function! s:FindSwn()
-        call system("find . -name '.*.swn'")
-        call system("find . -name '.swn'")
-endfunction
-
-function! s:FindAllSwap()
-        call system("find . -name '.*.sw*'")
-        call system("find . -name '.sw*'")
-endfunction!
 
 let &cpo = s:save_cpo
 unlet s:save_cpo
