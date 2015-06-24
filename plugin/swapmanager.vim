@@ -1,7 +1,7 @@
 "swapfile manager
 "Version  :1.0
 "Author   :kazuminn
-"License  :VIM LICENSE
+"License  :
 
 if exists('g:loaded_swapmanager')
         finish
@@ -17,6 +17,7 @@ command! FindSwp :call s:FindSwp()
 command! FindSwo :call s:FindSwo()
 command! FindSwn :call s:FindSwn()
 command! FindAllSwap :call s:FindAllSwap()
+command! Piyo :call Hoge() |
 
 
 let &cpo = s:save_cpo
