@@ -1,0 +1,61 @@
+*swapmanager.txt*	
+
+Version: 0.0.1
+Author : Kazumin 
+License: 
+
+==============================================================================
+CONTENTS					*template-contents*
+
+INTRODUCTION			|template-introduction|
+USAGE				|template-usage|
+  TEMPLATE SELECTION		  |template-selection|
+  COMMAND EXECUTION		  |template-command-execution|
+INTERFACE			|template-interface|
+  COMMANDS			  |template-commands|
+  FUNCTIONS			  |template-functions|
+  EVENTS			  |template-events|
+  OPTIONS			  |template-options|
+CHANGELOG			|template-changelog|
+
+
+
+==============================================================================
+INTRODUCTION					*template-introduction*
+
+
+
+==============================================================================
+USAGE						*template-usage*
+
+------------------------------------------------------------------------------
+TEMPLATE SELECTION				*template-selection*
+
+
+------------------------------------------------------------------------------
+COMMAND EXECUTION				*template-command-execution*
+
+
+==============================================================================
+INTERFACE					*template-interface*
+
+------------------------------------------------------------------------------
+COMMANDS					*template-commands*
+
+------------------------------------------------------------------------------
+FUNCTIONS					*template-functions*
+
+						*template#load()*
+------------------------------------------------------------------------------
+EVENTS						*template-events*
+
+
+------------------------------------------------------------------------------
+OPTIONS						*template-options*
+
+==============================================================================
+CHANGELOG					*template-changelog*
+
+
+==============================================================================
+vim:tw=78:fo=tcq2mM:ts=8:ft=help:norl
