@@ -12,7 +12,7 @@ let g:loaded_swapmanager = 1
 let s:save_cpo = &cpo
 set cpo&vim
 
-command! NoSwapfile :call s:noswap()
+command! NoSwapFile :call s:noswap()
 command! FindSwp :call s:FindSwp()
 command! FindSwo :call s:FindSwo()
 command! FindSwn :call s:FindSwn()
