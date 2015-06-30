@@ -4,10 +4,10 @@ set cpo&vim
 nmap W :call Delete_file()
 
 function! Delete_file()
-  s:line_number = line('.')      "行番号を取得
-  s:file_name   = getline('.')   "行の文字列を取得
-  d                              "行の文字列を削除
-  !rm s:file_name                "file削除
+  let s:line_number = line('.')      
+  let s:file_name   = getline('.')   
+  d                              
+  call delete(s:file_name)           
 endfunction
 
 
