@@ -4,11 +4,15 @@ set cpo&vim
 
 nmap W :call Delete_file()
 
+
+
 function! Delete_file()
     let s:file_name   = getline('.')   
     delete                              
     call delete(s:file_name)           
 endfunction
+
+
 
 function! All_delete_file(buffer_name)
     s:file_name_list = readfile(a:buffer_name)
@@ -17,6 +21,14 @@ function! All_delete_file(buffer_name)
     endfor
     q!
 endfunction
+
+
+
+function! Count_Swap_File()
+    call system("find . -name '*.sw*' | wc -l")     
+endfunction
+
+
 
 function! s:noswap()
     set noswapfile
