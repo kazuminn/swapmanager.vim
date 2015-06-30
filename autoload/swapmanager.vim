@@ -9,8 +9,8 @@ function! Delete_file()
   call delete(s:file_name)           
 endfunction
 
-function! All_delete_file()
-  s:file_name_list = readfile(swapfile.txt)
+function! All_delete_file(buffer_name)
+  s:file_name_list = readfile(a:buffer_name)
   for name in 
     deletes(s:file_name_list)
   endfor
@@ -60,22 +60,6 @@ function! Hoge()
 "  silent rm swapfile.txt
   w swapfile.txt
   
-  let user_option = &guioptions
-  set guioptions+=v
-
-  for e in file
-      let choice = confirm("Are you sure you want to erase B swapfile?", "&y:yes\n&n:no")
-      if choice == 0
-         :echo "user cancel daialog."
-      elseif choice == 1
-         :echo "user select 'A answer'."
-      elseif choice == 2
-         :echo "user select 'B answer'."
-      else
-         :echo "ERROR"
-      endif
-      let &guioptions = user_option
-  endfor
 endfunction
 
 let &cpo = s:save_cpo
