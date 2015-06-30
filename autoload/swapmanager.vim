@@ -4,12 +4,17 @@ set cpo&vim
 nmap W :call Delete_file()
 
 function! Delete_file()
-  let s:line_number = line('.')      
   let s:file_name   = getline('.')   
-  d                              
+  delete                              
   call delete(s:file_name)           
 endfunction
 
+function! All_delete_file()
+  s:file_name_list = readfile(swapfile.txt)
+  for name in 
+    deletes(s:file_name_list)
+  endfor
+endfunction
 
 function! s:noswap()
   set noswapfile
