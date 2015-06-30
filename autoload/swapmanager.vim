@@ -1,13 +1,14 @@
-
-let s:save_cpo = &cpo
 set cpo&vim
 
 
-noremap :tabprevious<ENTER> :call s:delete_file()
+nmap W :call Delete_file()
 
-function! s:delete_file(file_name)
-  !rm file_name
-endfunction!
+function! Delete_file()
+  s:line_number = line('.')      "行番号を取得
+  s:file_name   = getline('.')   "行の文字列を取得
+  d                              "行の文字列を削除
+  !rm s:file_name                "file削除
+endfunction
 
 
 function! s:noswap()
