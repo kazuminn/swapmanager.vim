@@ -6,7 +6,7 @@ nmap W :call Delete_file()
 
 
 
-function! Delete_file()
+function! Delete_file() 
     let s:file_name   = getline('.')   
     delete                              
     call delete(s:file_name)           
@@ -24,7 +24,7 @@ endfunction
 
 
 
-function! Count_Swap_File()
+function! Count_Swap_File()  "スワップファイルの数を求める。
     call system("find . -name '*.sw*' | wc -l")     
 endfunction
 
@@ -80,5 +80,17 @@ endfunction
 function! NoSwapFileManage() "swapfileを作成したくないファイルを管理する関数
     
 endfunction
+
+
+function! No_File_Swapfile() "スワップファイルがあるのにファイルがないswapfileを削除
+
+endfunction
+
+function! No_File_Swapfile_Restore() "スワップファイルがあるのにファイルがないswapfileから復元
+
+endfunction
+
+
+
 let &cpo = s:save_cpo
 unlet s:save_cpo
