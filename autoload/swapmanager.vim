@@ -5,6 +5,52 @@ set cpo&vim
 nmap W :call Delete_file()
 
 
+function! Os()
+  if exists('g:swap_user_os')
+    return g:shaberu_user_os
+  else
+    if has('win16') || has('win32') || has('win64')
+      let g:swap_user_os = 'win'
+    elseif has('win32unix')
+      let g:swap_user_os = 'win'
+    elseif (has('mac') || has('macunix') || has('gui_macvim') ||
+          \ (!executable('xdg-open') &&
+          \ system('uname') =~? '^darwin'))
+      let g:swap_user_os = 'mac'
+    elseif system('uname') =~? '^Linux'
+      let g:swap_user_os = 'linux'
+    elseif has('unix')
+      let g:swap_user_os = 'unix'
+    else
+      let g:swap_user_os = 'unknown'
+    endif
+    return g:swap_user_os
+  endif
+endfunction
+
+
+function! Command()
+  if exists('g:swapfile_user_define_say_command')
+    return g:shaberu_user_define_say_command
+  else
+    let l:os = Os()
+    if l:os == 'win'
+      " TODO: sapi.dllのライセンスがよくわからないのでvbsでごまかしてる
+      return 'cscript "' . g:Swap_path_sapi . '" "%%TEXT%%"'
+    elseif l:os == 'mac'
+      return 'say "%%TEXT%%"'
+    elseif l:os == 'unix'
+      " TODO: unixに標準ライブラリあるのかな…
+    elseif l:os == 'linux'
+      " TODO: linuxに標準ライブラリあるのかな…
+    endif
+  endif
+  return 0
+endfunction
+
+
+
+
 
 function! Delete_file() 
     let s:file_name   = getline('.')   
