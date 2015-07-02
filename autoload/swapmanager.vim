@@ -77,5 +77,8 @@ function! Hoge()
     w swapfile.txt
 endfunction
 
+function! NoSwapFileManage() "swapfileを作成したくないファイルを管理する関数
+    
+endfunction
 let &cpo = s:save_cpo
 unlet s:save_cpo
