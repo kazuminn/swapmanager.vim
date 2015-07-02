@@ -19,6 +19,11 @@ command! FindSwn :call s:FindSwn()
 command! FindAllSwap :call s:FindAllSwap()
 command! Piyo :call Hoge() |
 
+nnoremap <silent> <Plug>(swapmanager) :<c-u>FindAllSwap<CR>
+
+if !hasmapto('<plug>(swapmanager)')
+    silent! map <unique> <Leader>sw <Plug>(swapmanager)
+endif
 
 let &cpo = s:save_cpo
 unlet s:save_cpo
