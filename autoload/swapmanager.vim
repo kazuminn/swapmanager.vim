@@ -5,6 +5,7 @@ set cpo&vim
 nmap W :call Delete_file()
 
 
+
 function! Os()
   if exists('g:swap_user_os')
     return g:shaberu_user_os
@@ -29,20 +30,19 @@ function! Os()
 endfunction
 
 
-function! Command()
+function! Path()
   if exists('g:swapfile_user_define_say_command')
     return g:shaberu_user_define_say_command
   else
     let l:os = Os()
     if l:os == 'win'
-      " TODO: sapi.dllのライセンスがよくわからないのでvbsでごまかしてる
-      return 'cscript "' . g:Swap_path_sapi . '" "%%TEXT%%"'
+      return '%UserProfile%' 
     elseif l:os == 'mac'
-      return 'say "%%TEXT%%"'
+      return '~'
     elseif l:os == 'unix'
-      " TODO: unixに標準ライブラリあるのかな…
+        return '~'
     elseif l:os == 'linux'
-      " TODO: linuxに標準ライブラリあるのかな…
+        return '~'
     endif
   endif
   return 0
@@ -123,8 +123,18 @@ function! Hoge()
     w swapfile.txt
 endfunction
 
-function! NoSwapFileManage() "swapfileを作成したくないファイルを管理する関数
-    
+function! Add_Noswapfile() "swapfileを作成したくないファイルを管理する関数
+    call noswap()
+    new
+    let s:path = Path()
+    if !empty(glob("~/.vimrc")) "もしあれば
+        let lines = [ expand("%:p") ]
+        call writefile(lines, s:path)
+    else
+        let s:number = %s/^//n
+        let s:line_number = matchstr(s:number,'^13')
+        writefile(s:line_number,s:path)
+    endif
 endfunction
 
 
