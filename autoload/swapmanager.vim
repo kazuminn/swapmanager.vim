@@ -125,7 +125,6 @@ endfunction
 
 function! Add_Noswapfile() "swapfileを作成したくないファイルを管理する関数
     call noswap()
-    new
     let s:path = Path()
     if !empty(glob("~/.vimrc")) "もしあれば
         let lines = [ expand("%:p") ]
