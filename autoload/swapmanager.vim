@@ -76,7 +76,7 @@ endfunction
 
 
 
-function! s:noswap()
+function! s:Noswap()
     set noswapfile
 endfunction
 
@@ -123,24 +123,36 @@ function! Hoge()
     w swapfile.txt
 endfunction
 
-function! Add_Noswapfile() "swapfileを作成したくないファイルを管理する関数
-    call noswap()
-    let s:path = Path()
-    if !empty(glob("~/.vimrc")) "もしあれば
-        let lines = [ expand("%:p") ]
-        call writefile(lines, s:path)
+"----------------------------------------------------------------------------------
+"swapfileを作りたくないファイルを管理する関数群
+
+
+function! Add_Noswapfile() "(あるファイルにファイル名を追加
+    call s:Noswap()
+    "let s:path = Path()
+    let s:path = ".test"
+    let s:file_name = expand("%:p")
+    if !empty(glob(".test"))
+        redir! >> .test 
+            echo expand("%:p") 
+        redir END
     else
-        let s:number = %s/^//n
-        let s:line_number = matchstr(s:number,'^13')
-        writefile(s:line_number,s:path)
+        let s:lines = [ s:file_name ]
+        call writefile(s:lines, s:path)
     endif
 endfunction
 
+function! No_Readd() "ファイル名がすでに追記されている場合は追加しない。
+
+endfunction
+
+"----------------------------------------------------------------------------------
 
 function! No_File_Swapfile() "スワップファイルがあるのにファイルがないswapfileを削除
 
 endfunction
 
+"-----------------------------------------------------------------------------------
 function! No_File_Swapfile_Restore() "スワップファイルがあるのにファイルがないswapfileから復元
 
 endfunction
