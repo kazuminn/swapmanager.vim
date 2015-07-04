@@ -152,6 +152,14 @@ function! No_Readd() "ファイル名がすでに追記されている場合は�
     endfor
 endfunction
 
+function! This_File_No_Swapfile() "カレントファイルがswapfileを作ったらダメなのか調べる関数
+    for line in readfile(".test") 
+        if 0  == match(line,expand("%:p"))
+            echo "This file is no-create-swapfile"
+        endif
+    endfor
+endfunction
+
 "----------------------------------------------------------------------------------
 
 function! No_File_Swapfile() "スワップファイルがあるのにファイルがないswapfileを削除
