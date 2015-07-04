@@ -127,8 +127,9 @@ endfunction
 "swapfileを作りたくないファイルを管理する関数群
 
 
-function! Add_Noswapfile() "(あるファイルにファイル名を追加
+function! Add_Noswapfile() abort "(あるファイルにファイル名を追加
     call s:Noswap()
+    call No_Readd()
     "let s:path = Path()
     let s:path = ".test"
     let s:file_name = expand("%:p")
@@ -142,8 +143,13 @@ function! Add_Noswapfile() "(あるファイルにファイル名を追加
     endif
 endfunction
 
-function! No_Readd() "ファイル名がすでに追記されている場合は追加しない。
 
+function! No_Readd() "ファイル名がすでに追記されている場合は追加しない。
+    for line in readfile(".test") 
+        if 0  == match(line,expand("%:p"))
+            reigaihassei
+        endif
+    endfor
 endfunction
 
 "----------------------------------------------------------------------------------
