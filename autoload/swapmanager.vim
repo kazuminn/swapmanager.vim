@@ -4,7 +4,10 @@ set cpo&vim
 
 nmap W :call Delete_file()
 
-
+augroup swap
+  autocmd!
+  autocmd vimEnter * :call Add_Noswapfile() 
+augroup END 
 
 function! Os()
   if exists('g:swap_user_os')
