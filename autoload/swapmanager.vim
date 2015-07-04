@@ -6,10 +6,13 @@ nmap W :call Delete_file()
 
 augroup swap
   autocmd!
-  autocmd vimEnter * :call Add_Noswapfile() 
+  autocmd vimEnter * :call Auto_Noswapfile() 
+  autocmd BufReadPre * :call Auto_Noswapfile()  
 augroup END 
 
-function! Os()
+"------------------------------------------------------------------------------------
+"osの違いを埋める
+function! Os() "osの判断
   if exists('g:swap_user_os')
     return g:shaberu_user_os
   else
@@ -33,7 +36,7 @@ function! Os()
 endfunction
 
 
-function! Path()
+function! Path() "osによっての、カレントディレクトリ表現
   if exists('g:swapfile_user_define_say_command')
     return g:shaberu_user_define_say_command
   else
@@ -55,7 +58,7 @@ endfunction
 
 
 
-function! Delete_file() 
+function! Delete_file()  "カーソル行のファイルを削除する関数
     let s:file_name   = getline('.')   
     delete                              
     call delete(s:file_name)           
@@ -63,7 +66,7 @@ endfunction
 
 
 
-function! All_delete_file(buffer_name)
+function! All_delete_file(buffer_name) "すべてのswapfileを削除する関数
     s:file_name_list = readfile(a:buffer_name)
     for name in s:file_name_list
         deletes(name)
@@ -73,23 +76,23 @@ endfunction
 
 
 
-function! Count_Swap_File()  "スワップファイルの数を求める。
+function! Count_Swap_File()  "スワップファイルの数を求める関数
     call system("find . -name '*.sw*' | wc -l")     
 endfunction
 
 
 
-function! s:Noswap()
+function! s:Noswap() "swapfileを作らないようにするset noswapfileのalias
     set noswapfile
 endfunction
 
 
-function! s:ChangeSwapDirectory(dir)
+function! s:ChangeSwapDirectory(dir) "指定したディレクトリのswapfileをすべて削除
     set directory=(dir)
 endfunction
 
 
-function! s:FindSwp()
+function! s:FindSwp()  "swpを見つける関数
     redi > new
     call system("find . -name '.*.swp'")
     call system("find . -name '.swp'")
@@ -97,7 +100,7 @@ function! s:FindSwp()
 endfunction
 
 
-function! FindSwo()
+function! FindSwo() "swoを見つける関数
     new | read !find ~/ -name '.*.swo'
     redraw!
     w swofile.txt
@@ -105,13 +108,13 @@ function! FindSwo()
 endfunction
 
 
-function! s:FindSwn()
+function! s:FindSwn() "swnを見つける関数
     call system("find . -name '.*.swn'")
     call system("find . -name '.swn'")
 endfunction
 
 
-function! s:FindAllSwap()
+function! s:FindAllSwap() "すべてのswapfileを見つける関数
     call system("find . -name '.*.sw*'")
     call system("find . -name '.sw*'")
 endfunction!
@@ -125,6 +128,9 @@ function! Hoge()
     redraw!
     w swapfile.txt
 endfunction
+
+
+
 
 "----------------------------------------------------------------------------------
 "swapfileを作りたくないファイルを管理する関数群
@@ -164,14 +170,21 @@ function! This_File_No_Swapfile() "カレントファイルがswapfileを作っ�
     endfor
 endfunction
 
+
+function! Auto_Noswapfile() "カレントファイルがswapfileを作ったらダメだったら,set noswapfileする関数
+    call This_File_No_Swapfile()
+    call s:Noswap()
+endfunction
+
 "----------------------------------------------------------------------------------
-
-function! No_File_Swapfile() "スワップファイルがあるのにファイルがないswapfileを削除
-
+"スワップファイルがあるのにファイルがないswapfileを削除
+function! No_File_Swapfile() 
+    find . -name '.*.swn'
 endfunction
 
 "-----------------------------------------------------------------------------------
-function! No_File_Swapfile_Restore() "スワップファイルがあるのにファイルがないswapfileから復元
+""スワップファイルがあるのにファイルがないswapfileから復元
+function! No_File_Swapfile_Restore() 
 
 endfunction
 
