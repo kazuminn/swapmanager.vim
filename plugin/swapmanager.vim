@@ -1,7 +1,7 @@
 "swapfile manager
 "Version  :1.0
 "Author   :kazuminn
-"License  :
+"License  : MIT LICENSE
 
 if exists('g:loaded_swapmanager')
         finish

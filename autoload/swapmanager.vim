@@ -6,9 +6,9 @@ nmap W :call Delete_file()
 
 augroup swap
   autocmd!
-  autocmd vimEnter * :call Auto_Noswapfile() 
-  autocmd BufReadPre * :call Auto_Noswapfile()  
-augroup END 
+  autocmd vimEnter * :call Auto_Noswapfile()
+  autocmd BufReadPre * :call Auto_Noswapfile()
+augroup END
 
 "------------------------------------------------------------------------------------
 "osの違いを埋める
@@ -42,7 +42,7 @@ function! Path() "osによっての、カレントディレクトリ表現
   else
     let l:os = Os()
     if l:os == 'win'
-      return '%UserProfile%' 
+      return '%UserProfile%'
     elseif l:os == 'mac'
       return '~'
     elseif l:os == 'unix'
@@ -59,9 +59,9 @@ endfunction
 
 
 function! Delete_file()  "カーソル行のファイルを削除する関数
-    let s:file_name   = getline('.')   
-    delete                              
-    call delete(s:file_name)           
+    let s:file_name   = getline('.')
+    delete
+    call delete(s:file_name)
 endfunction
 
 
@@ -77,7 +77,7 @@ endfunction
 
 
 function! Count_Swap_File()  "スワップファイルの数を求める関数
-    call system("find . -name '*.sw*' | wc -l")     
+    call system("find . -name '*.sw*' | wc -l")
 endfunction
 
 
@@ -143,8 +143,8 @@ function! Add_Noswapfile() abort "(あるファイルにファイル名を追加
     let s:path = ".test"
     let s:file_name = expand("%:p")
     if !empty(glob(".test"))
-        redir! >> .test 
-            echo expand("%:p") 
+        redir! >> .test
+            echo expand("%:p")
         redir END
     else
         let s:lines = [ s:file_name ]
@@ -154,7 +154,7 @@ endfunction
 
 
 function! No_Readd() "ファイル名がすでに追記されている場合は追加しない。
-    for line in readfile(".test") 
+    for line in readfile(".test")
         if 0  == match(line,expand("%:p"))
             reigaihassei
         endif
@@ -163,7 +163,7 @@ endfunction
 
 
 function! This_File_No_Swapfile() "カレントファイルがswapfileを作ったらダメなのか調べる関数
-    for line in readfile(".test") 
+    for line in readfile(".test")
         if 0  == match(line,expand("%:p"))
             echo "This file is no-create-swapfile"
         endif
@@ -176,15 +176,19 @@ function! Auto_Noswapfile() "カレントファイルがswapfileを作ったら�
     call s:Noswap()
 endfunction
 
+function! Delete_swapfilelist() "一度swapfile作ったらダメなlistに追加したけど,listからファイル名から削除
+
+
+endfunction!
 "----------------------------------------------------------------------------------
 "スワップファイルがあるのにファイルがないswapfileを削除
-function! No_File_Swapfile() 
+function! No_File_Swapfile()
     find . -name '.*.swn'
 endfunction
 
 "-----------------------------------------------------------------------------------
 ""スワップファイルがあるのにファイルがないswapfileから復元
-function! No_File_Swapfile_Restore() 
+function! No_File_Swapfile_Restore()
 
 endfunction
 
